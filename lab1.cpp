@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <functional>  //std::function
 #include <cassert>     //assert
+#include <cmath>
 
 // using namespace std;
 
@@ -132,7 +133,7 @@ int main() {
     {
         std::cout << "\n\nTEST PHASE 6: test with long sequence loaded from a file\n\n";
 
-        std::ifstream file("../../test_data.txt");
+        std::ifstream file("./test_data.txt");
 
         if (!file) {
             std::cout << "Could not open test_data.txt!!\n";
@@ -146,10 +147,10 @@ int main() {
         std::cout << "Number of items in the sequence: " << seq.size() << '\n';
 
         // display sequence
-        // std::for_each(std::begin(seq), std::end(seq), Formatter<int>(std::cout, 8, 5));
+        std::for_each(std::begin(seq), std::end(seq), Formatter<int>(std::cout, 8, 5));
 
         // read the result sequence from file
-        file.open("../../test6_res.txt");
+        file.open("./test6_res.txt");
 
         if (!file) {
             std::cout << "Could not open test6_res.txt!!\n";
@@ -161,7 +162,7 @@ int main() {
         std::cout << "\nNumber of items in the result sequence: " << res.size() << '\n';
 
         // display sequence
-        // std::for_each(std::begin(res), std::end(res), Formatter<int>(std::cout, 8, 5));
+        std::for_each(std::begin(res), std::end(res), Formatter<int>(std::cout, 8, 5));
 
         assert(seq.size() == res.size());
 
@@ -186,7 +187,6 @@ void TND004::stable_partition_iterative(std::vector<int>& V, std::function<bool(
 	std::copy_if(V.begin(), V.end(), std::back_inserter(unstable), std::not_fn(p));
 	V.erase(std::remove_if(V.begin(), V.end(), std::not_fn(p)), V.end());
 	std::copy(unstable.begin(), unstable.end(), std::back_inserter(V));
-
 }
 
 // Auxiliary function that performs the stable partition recursivelly
@@ -197,14 +197,51 @@ namespace TND004 {
     std::vector<int>::iterator stable_partition(std::vector<int>& V, std::vector<int>::iterator first,
                                                 std::vector<int>::iterator last,
                                                 std::function<bool(int)> p) {
-        // ADD CODE
+        // d=5 => d/2=2
+        //   *                       *
+        //   1    2    3    4    5
+		// d=2 => d/2=1
+		//   *         *        
+        //   1    2    3    4    5
+		// d=1 => base case
+		//   *    *        
+        //   1    2    3    4    5
+        
+        // d=3 => d/2=1
+		//   	       *			*
+        //   1    2    3    4    5
+        //d=2 => d/2=1
+		//   	       		*		*
+        //   1    2    3    4    5
+		//d=1 => base case
+        //   	       			 *	*
+        //   1    2    3    4    5
 
-        return first;  // delete this line
+		
+		//Base:
+        int d = std::distance(first, last);
+		if (d == 1) {
+			// std::cout << "Value: " << *first << "\n\n";
+            return p(*first) ? ++first : first;
+			// if (p(*first)) return ++first;
+			// return first;
+		}
+		//std::cout << "MIDFL : " << (int) (d/2) << "\n\n";
+
+		//recursive part 
+		auto it1 = stable_partition(V, first, first + (int) (d/2), p);
+		auto it2 = stable_partition(V, first + (int) (d/2), last, p);
+
+		int mid = std::distance(it1, it2)/2;
+		//std::cout << "MID : " << mid << "\n\n";
+
+		return std::rotate(it1, it1 + mid, it2);
     }
 }  // namespace TND004
 
 void TND004::stable_partition(std::vector<int>& V, std::function<bool(int)> p) {
     TND004::stable_partition(V, std::begin(V), std::end(V), p);  // call auxiliary function
+	std::copy(std::begin(V), std::end(V), std::ostream_iterator<int>{std::cout, " "});
 }
 
 // To test the divide-and-conquer/iterative algorithms with input sequence V
@@ -212,11 +249,12 @@ void TND004::stable_partition(std::vector<int>& V, std::function<bool(int)> p) {
 void execute(std::vector<int>& V, const std::vector<int>& res) {
     std::vector<int> _copy{V};
 
-    std::cout << "\n\nIterative stable partition\n";
-    TND004::stable_partition_iterative(V, even);
-    assert(V == res);  // compare with the expected result
+    // std::cout << "\n\nIterative stable partition\n";
+    // TND004::stable_partition_iterative(V, even);
+    // assert(V == res);  // compare with the expected result
 
-    // std::cout << "Divide-and-conquer stable partition\n";
-    // TND004::stable_partition(_copy, even);
-    // assert(_copy == res);  // compare with the expected result
+    std::cout << "Divide-and-conquer stable partition\n";
+    TND004::stable_partition(_copy, even);
+    assert(_copy == res);  // compare with the expected result
+	
 }
