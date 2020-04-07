@@ -196,8 +196,8 @@ bool even(int i) {
 
 // Iterative algorithm
 void TND004::stable_partition_iterative(std::vector<int>& V, std::function<bool(int)> p) {
-	if(V.size() <= 1) return;
-	std::vector<int> unstable;
+	if(V.size() <= 1) return; //1
+	std::vector<int> unstable; 
 
 	std::copy_if(V.begin(), V.end(), std::back_inserter(unstable), std::not_fn(p)); //n x (1 + 1) -> 2 x n
 	V.erase(std::remove_if(V.begin(), V.end(), std::not_fn(p)), V.end()); //n x (1 + 1 + 1) -> 3 x n
@@ -206,11 +206,11 @@ void TND004::stable_partition_iterative(std::vector<int>& V, std::function<bool(
 
 	/*-------- Which is better? --------*/
 
-	// std::vector<int> unstable;
-	// std::vector<int> stable;
+	// std::vector<int> unstable; 1
+	// std::vector<int> stable; 1
 
-	// for(auto item : V) { //n
-	// 	p(item) ? stable.push_back(item) : unstable.push_back(item); // 1 + 1 + 1 = 3
+	// for(auto item : V) { // 1 
+	// 	p(item) ? stable.push_back(item) : unstable.push_back(item); // 1 + 1 + 1 = 3   n
 	// } // 3 x n time -> O(n)
 
 	// V = stable; // n
