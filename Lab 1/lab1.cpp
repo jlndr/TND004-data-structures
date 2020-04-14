@@ -74,114 +74,114 @@ int main() {
 	{
 		std::cout << "TEST PHASE 1\n\n";
 
-		//std::vector<int> seq{1, 2};
-		std::vector<int> seq{1,3,5,7,9};
+		std::vector<int> seq{2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2};
+		// std::vector<int> seq{1,3,5,7,9};
 		// std::vector<int> seq{2,4,6,5,8,1,3};
 
 		std::cout << "Sequence: ";
 		std::copy(std::begin(seq), std::end(seq), std::ostream_iterator<int>{std::cout, " "});
 
-		// execute(seq, std::vector<int>{2, 1});
-		execute(seq, std::vector<int> {1,3,5,7,9});
+		execute(seq, std::vector<int>{2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2});
+		// execute(seq, std::vector<int> {1,3,5,7,9});
 	}
+	
+	// /*****************************************************
+	//  * TEST PHASE 2                                       *
+	//  ******************************************************/
+	// {
+	// 	std::cout << "\n\nTEST PHASE 2\n\n";
 
-	/*****************************************************
-	 * TEST PHASE 2                                       *
-	 ******************************************************/
-	{
-		std::cout << "\n\nTEST PHASE 2\n\n";
+	// 	std::vector<int> seq{2};
 
-		std::vector<int> seq{2};
+	// 	std::cout << "Sequence: ";
+	// 	std::copy(std::begin(seq), std::end(seq), std::ostream_iterator<int>{std::cout, " "});
 
-		std::cout << "Sequence: ";
-		std::copy(std::begin(seq), std::end(seq), std::ostream_iterator<int>{std::cout, " "});
+	// 	execute(seq, std::vector<int>{2});
+	// }
 
-		execute(seq, std::vector<int>{2});
-	}
+	// /*****************************************************
+	//  * TEST PHASE 3                                       *
+	//  ******************************************************/
+	// {
+	// 	std::cout << "\n\nTEST PHASE 3\n\n";
 
-	/*****************************************************
-	 * TEST PHASE 3                                       *
-	 ******************************************************/
-	{
-		std::cout << "\n\nTEST PHASE 3\n\n";
+	// 	std::vector<int> seq{3};
 
-		std::vector<int> seq{3};
+	// 	std::cout << "Sequence: ";
+	// 	std::copy(std::begin(seq), std::end(seq), std::ostream_iterator<int>{std::cout, " "});
 
-		std::cout << "Sequence: ";
-		std::copy(std::begin(seq), std::end(seq), std::ostream_iterator<int>{std::cout, " "});
+	// 	execute(seq, std::vector<int>{3});
+	// }
 
-		execute(seq, std::vector<int>{3});
-	}
+	// /*****************************************************
+	//  * TEST PHASE 4                                       *
+	//  ******************************************************/
+	// {
+	// 	std::cout << "\n\nTEST PHASE 4\n\n";
 
-	/*****************************************************
-	 * TEST PHASE 4                                       *
-	 ******************************************************/
-	{
-		std::cout << "\n\nTEST PHASE 4\n\n";
+	// 	std::vector<int> seq{3, 3};
 
-		std::vector<int> seq{3, 3};
+	// 	std::cout << "Sequence: ";
+	// 	std::copy(std::begin(seq), std::end(seq), std::ostream_iterator<int>(std::cout, " "));
 
-		std::cout << "Sequence: ";
-		std::copy(std::begin(seq), std::end(seq), std::ostream_iterator<int>(std::cout, " "));
+	// 	execute(seq, std::vector<int>{3, 3});
+	// }
 
-		execute(seq, std::vector<int>{3, 3});
-	}
+	// /*****************************************************
+	//  * TEST PHASE 5                                       *
+	//  ******************************************************/
+	// {
+	// 	std::cout << "\n\nTEST PHASE 5\n\n";
 
-	/*****************************************************
-	 * TEST PHASE 5                                       *
-	 ******************************************************/
-	{
-		std::cout << "\n\nTEST PHASE 5\n\n";
+	// 	std::vector<int> seq{1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-		std::vector<int> seq{1, 2, 3, 4, 5, 6, 7, 8, 9};
+	// 	std::cout << "Sequence: ";
+	// 	std::copy(std::begin(seq), std::end(seq), std::ostream_iterator<int>(std::cout, " "));
 
-		std::cout << "Sequence: ";
-		std::copy(std::begin(seq), std::end(seq), std::ostream_iterator<int>(std::cout, " "));
+	// 	execute(seq, std::vector<int>{2, 4, 6, 8, 1, 3, 5, 7, 9});
+	// }
 
-		execute(seq, std::vector<int>{2, 4, 6, 8, 1, 3, 5, 7, 9});
-	}
+	// /*****************************************************
+	//  * TEST PHASE 6                                       *
+	//  ******************************************************/
+	// {
+	// 	std::cout << "\n\nTEST PHASE 6: test with long sequence loaded from a file\n\n";
 
-	/*****************************************************
-	 * TEST PHASE 6                                       *
-	 ******************************************************/
-	{
-		std::cout << "\n\nTEST PHASE 6: test with long sequence loaded from a file\n\n";
+	// 	std::ifstream file("./test_data.txt");
 
-		std::ifstream file("./test_data.txt");
+	// 	if (!file) {
+	// 		std::cout << "Could not open test_data.txt!!\n";
+	// 		return 0;
+	// 	}
 
-		if (!file) {
-			std::cout << "Could not open test_data.txt!!\n";
-			return 0;
-		}
+	// 	// read the input sequence from file
+	// 	std::vector<int> seq{std::istream_iterator<int>{file}, std::istream_iterator<int>()};
+	// 	file.close();
 
-		// read the input sequence from file
-		std::vector<int> seq{std::istream_iterator<int>{file}, std::istream_iterator<int>()};
-		file.close();
+	// 	std::cout << "Number of items in the sequence: " << seq.size() << '\n';
 
-		std::cout << "Number of items in the sequence: " << seq.size() << '\n';
+	// 	// // display sequence
+	// 	// std::for_each(std::begin(seq), std::end(seq), Formatter<int>(std::cout, 8, 5));
 
-		// // display sequence
-		// std::for_each(std::begin(seq), std::end(seq), Formatter<int>(std::cout, 8, 5));
+	// 	// read the result sequence from file
+	// 	file.open("./test6_res.txt");
 
-		// read the result sequence from file
-		file.open("./test6_res.txt");
+	// 	if (!file) {
+	// 		std::cout << "Could not open test6_res.txt!!\n";
+	// 		return 0;
+	// 	}
 
-		if (!file) {
-			std::cout << "Could not open test6_res.txt!!\n";
-			return 0;
-		}
+	// 	std::vector<int> res{std::istream_iterator<int>{file}, std::istream_iterator<int>()};
 
-		std::vector<int> res{std::istream_iterator<int>{file}, std::istream_iterator<int>()};
+	// 	std::cout << "\nNumber of items in the result sequence: " << res.size() << '\n';
 
-		std::cout << "\nNumber of items in the result sequence: " << res.size() << '\n';
+	// 	// // display sequence
+	// 	// std::for_each(std::begin(res), std::end(res), Formatter<int>(std::cout, 8, 5));
 
-		// // display sequence
-		// std::for_each(std::begin(res), std::end(res), Formatter<int>(std::cout, 8, 5));
+	// 	assert(seq.size() == res.size());
 
-		assert(seq.size() == res.size());
-
-		execute(seq, res);
-	}
+	// 	execute(seq, res);
+	// }
 
 	return 0;
 }
@@ -197,7 +197,7 @@ bool even(int i) {
 // Iterative algorithm
 void TND004::stable_partition_iterative(std::vector<int>& V, std::function<bool(int)> p) {
 	if(V.size() <= 1) return; //1
-	std::vector<int> unstable; 
+	std::vector<int> unstable; //1
 
 	std::copy_if(V.begin(), V.end(), std::back_inserter(unstable), std::not_fn(p)); //n x (1 + 1) -> 2 x n
 	V.erase(std::remove_if(V.begin(), V.end(), std::not_fn(p)), V.end()); //n x (1 + 1 + 1) -> 3 x n
