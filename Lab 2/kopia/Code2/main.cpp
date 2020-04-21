@@ -267,7 +267,6 @@ int main() {
         // test
         assert(S3 == Set{});
 
-
         std::vector<int> A4{3, 4, 24};
         assert((S2 - 2 + S3 + 24) == Set{A4});
         assert(Set::get_count_nodes() == 12);

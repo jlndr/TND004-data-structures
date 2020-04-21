@@ -14,7 +14,9 @@ int Set::get_count_nodes() {
 }
 
 // Default constructor
-Set::Set() : counter{0} {
+Set::Set()
+	: counter{0}
+{
 	head = new Node(0, nullptr, nullptr);
 	tail = new Node(0, nullptr, nullptr);
 	head->next = tail;
@@ -25,9 +27,9 @@ Set::Set() : counter{0} {
 Set::Set(int n)
 	: Set{}  // create an empty list
 {
-	Node* temp = new Node(n, tail, head);
-	head->next = temp;
-	tail->prev = temp;
+	Node* ptr = new Node(n, tail, head);
+	head->next = ptr;
+	tail->prev = ptr;
 	++counter;
 }
 
@@ -35,27 +37,28 @@ Set::Set(int n)
 Set::Set(const std::vector<int>& v)
 	: Set{}  // create an empty list
 {
-	Node* dummy = head;
+	Node* ptr = head;
 	
 	for(int item : v) {
-		Node* temp = new Node(item, nullptr, dummy);
-		dummy->next = temp;
-		dummy = temp;
+		ptr->next = new Node(item, nullptr, ptr);;
+		ptr = ptr->next;
 		++counter;
 	}
-	dummy->next = tail;
-	tail->prev = dummy;
+	ptr->next = tail;
+	tail->prev = ptr;
 }
 
 // Make the set empty
 void Set::make_empty() {
 	if(head->next == tail) return;
 		
-	Node* dummy = head->next;
-		while(dummy != tail) {
-			dummy = dummy->next;
-			delete dummy->prev;
-		}
+	Node* ptr = head->next;
+
+	while(ptr != tail) {
+		ptr = ptr->next;
+		delete ptr->prev;
+	}
+
 	head->next = tail;
 	tail->prev = head;
 	counter = 0;
@@ -73,25 +76,24 @@ Set::~Set() {
 Set::Set(const Set& source)
 	: Set{}  // create an empty list
 {
-	Node* temp_source = source.head->next;
-	Node* temp_this = head;
+	Node* ptr_source = source.head->next;
+	Node* ptr_this = head;
 
-	while(temp_source != source.tail) {
-		temp_this->next = new Node(temp_source->value, nullptr, temp_this);
-		temp_source = temp_source->next;
-		temp_this = temp_this->next;
+	while(ptr_source != source.tail) {
+		ptr_this->next = new Node(ptr_source->value, nullptr, ptr_this);
+		ptr_source = ptr_source->next;
+		ptr_this = ptr_this->next;
 	}
-	temp_this->next = tail;
-	tail->prev = temp_this;
+
+	ptr_this->next = tail;
+	tail->prev = ptr_this;
 	counter = source.counter;
 }
 
 // Copy-and-swap assignment operator
 Set& Set::operator=(Set source) {
-	Set _copy{source};
-
-	std::swap(head, _copy.head);
-	std::swap(tail, _copy.tail);
+	std::swap(head, source.head);
+	std::swap(tail, source.tail);
 
 	counter = source.counter;
 	
@@ -108,10 +110,10 @@ bool Set::is_member(int val) const {
 	if(head->next == tail ) return false;
 	if(head->next->value > val || tail->prev->value < val) return false;
 
-	Node* temp = head->next;
-	while(temp != tail){
-		if(temp->value == val) return true;
-		temp = temp->next;
+	Node* ptr = head->next;
+	while(ptr != tail){
+		if(ptr->value == val) return true;
+		ptr = ptr->next;
 	}
 
 	return false;
@@ -123,63 +125,76 @@ size_t Set::cardinality() const {
 }
 
 // Return true, if the set is a subset of b, otherwise false
-// a <= b iff every member of a is a member of b
+// a <= b if every member of a is a member of b
 bool Set::operator<=(const Set& b) const {
-	// IMPLEMENT
+	Node* ptr_this = head->next;
+	Node* ptr_b = b.head->next;
 
-	return false;  // remove this line
+	while(ptr_this != tail && ptr_b != b.tail){
+		if(ptr_this->value > ptr_b->value) {
+			ptr_b = ptr_b->next;
+			continue;
+		}
+		
+		if(ptr_this->value != ptr_b->value) return false;
+		ptr_this = ptr_this->next;
+		ptr_b = ptr_b->next; 
+	}
+	
+	return true;
+	// return (*this * b).counter == counter;
 }
 
 // Return true, if the set is equal to set b
-// a == b, iff a <= b and b <= a
+// a == b, if a <= b and b <= a
 bool Set::operator==(const Set& b) const {
-	// IMPLEMENT
-
-	return false;  // remove this line
+	if(counter != b.counter) return false;
+	return (*this <= b && b <= *this);
 }
 
 // Return true, if the set is different from set b
 // a == b, iff a <= b and b <= a
 bool Set::operator!=(const Set& b) const {
-	// IMPLEMENT
-
-	return false;  // remove this line
+	if(counter != b.counter) return true;
+	return !(*this <= b && b <= *this);
 }
 
 // Return true, if the set is a strict subset of S, otherwise false
 // a == b, iff a <= b but not b <= a
 bool Set::operator<(const Set& b) const {
-	// IMPLEMENT
-
-	return false;  // remove this line
+	// if(counter == b.counter) return false;
+	return (counter != b.counter && *this <= b);
 }
 
 // Modify *this such that it becomes the union of *this with Set S
 // Add to *this all elements in Set S (repeated elements are not allowed)
 Set& Set::operator+=(const Set& S) {
-
 	if(is_empty()) {
 		*this = S;
 		return *this;
 	}
 
-	Node* temp_this = head->next;
-	Node* temp_s = S.head->next;
+	Node* ptr_this = head->next;
+	Node* ptr_s = S.head->next;
 
-	while(temp_s != S.tail) {
-		if(temp_this->value > temp_s->value && temp_this->prev->value != temp_s->value) {
-			// temp_this->prev->next = new Node(temp_s->value, temp_this, temp_this->prev);
-			// temp_this->prev = temp_this->prev->next;
-			insert(temp_this, temp_s->value);
+	while(ptr_s != S.tail && ptr_this != tail) {
+		if(ptr_this->value == ptr_s->value) {
+			ptr_this = ptr_this->next;
+			ptr_s = ptr_s->next;
 		}
-		
-		if(temp_this->value < temp_s->value) {
-			temp_this = temp_this->next;
-			if(temp_this == tail) break;
-			continue;
+		else if(ptr_this->value > ptr_s->value) {
+			insert(ptr_this, ptr_s->value);
+			ptr_s = ptr_s->next;
 		}
+		else {
+			ptr_this = ptr_this->next;
+		}
+	}
 
-		temp_s = temp_s->next;
+	// if s is larger than *this
+	while(ptr_s != S.tail) {
+		insert(tail, ptr_s->value);
+		ptr_s = ptr_s->next;
 	}
 
 	return *this;
@@ -192,23 +207,23 @@ Set& Set::operator*=(const Set& S) {
 		return *this;
 	}
 
-	Node* temp_this = head->next;
-	Node* temp_s = S.head->next;
+	Node* ptr_this = head->next;
+	Node* ptr_s = S.head->next;
 
-	while(temp_this != tail) {
-		if(temp_this->value < temp_s->value || temp_s == S.tail) {
-			temp_this = temp_this->next;
-			remove(temp_this->prev);
+	while(ptr_this != tail) {
+		if(ptr_this->value < ptr_s->value || ptr_s == S.tail) {
+			ptr_this = ptr_this->next;
+			remove(ptr_this->prev);
 			continue;
 		}
 		
-		if(temp_this->value > temp_s->value) {
-			temp_s = temp_s->next;
+		if(ptr_this->value > ptr_s->value) {
+			ptr_s = ptr_s->next;
 			continue;
 		}
 		
-		temp_this = temp_this->next;
-		temp_s = temp_s->next;
+		ptr_this = ptr_this->next;
+		ptr_s = ptr_s->next;
 	}
 
 	return *this;
@@ -220,22 +235,22 @@ Set& Set::operator-=(const Set& S) {
 		return *this;
 	}
 
-	Node* temp_this = head->next;
-	Node* temp_s = S.head->next;
+	Node* ptr_this = head->next;
+	Node* ptr_s = S.head->next;
 
-	while(temp_s != S.tail && temp_this != tail) {
-		if(temp_this->value > temp_s->value) {
-			temp_s = temp_s->next;
+	while(ptr_s != S.tail && ptr_this != tail) {
+		if(ptr_this->value > ptr_s->value) {
+			ptr_s = ptr_s->next;
 			continue;
 		}
-		if(temp_this->value < temp_s->value) {
-			temp_this = temp_this->next;
+		if(ptr_this->value < ptr_s->value) {
+			ptr_this = ptr_this->next;
 			continue;
 		}
 		
-		temp_this = temp_this->next;
-		temp_s = temp_s->next;
-		remove(temp_this->prev);
+		ptr_this = ptr_this->next;
+		ptr_s = ptr_s->next;
+		remove(ptr_this->prev);
 	}
 
 	return *this;
