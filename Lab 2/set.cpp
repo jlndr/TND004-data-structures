@@ -28,10 +28,6 @@ Set::Set(int n)
 	: Set{}  // create an empty list
 {
 	insert(tail, n);
-	// Node* ptr = new Node(n, tail, head);
-	// head->next = ptr;
-	// tail->prev = ptr;
-	// ++counter;
 }
 
 // Constructor to create a Set from a sorted vector v
@@ -245,7 +241,7 @@ Set& Set::operator-=(const Set& S) {
 
 	Node* ptr_this = head->next;
 	Node* ptr_s = S.head->next;
-	
+
 	while(ptr_s != S.tail && ptr_this != tail) {
 		if(ptr_this->value > ptr_s->value) {
 			ptr_s = ptr_s->next;
