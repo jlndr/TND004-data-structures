@@ -27,10 +27,11 @@ Set::Set()
 Set::Set(int n)
 	: Set{}  // create an empty list
 {
-	Node* ptr = new Node(n, tail, head);
-	head->next = ptr;
-	tail->prev = ptr;
-	++counter;
+	insert(tail, n);
+	// Node* ptr = new Node(n, tail, head);
+	// head->next = ptr;
+	// tail->prev = ptr;
+	// ++counter;
 }
 
 // Constructor to create a Set from a sorted vector v
@@ -40,7 +41,7 @@ Set::Set(const std::vector<int>& v)
 	Node* ptr = head;
 	
 	for(int item : v) {
-		ptr->next = new Node(item, nullptr, ptr);;
+		ptr->next = new Node(item, nullptr, ptr);
 		ptr = ptr->next;
 		++counter;
 	}
@@ -141,7 +142,7 @@ bool Set::operator<=(const Set& b) const {
 		ptr_b = ptr_b->next; 
 	}
 	
-	return true;
+	return (ptr_this == tail);
 	// return (*this * b).counter == counter;
 }
 
@@ -210,8 +211,8 @@ Set& Set::operator*=(const Set& S) {
 	Node* ptr_this = head->next;
 	Node* ptr_s = S.head->next;
 
-	while(ptr_this != tail) {
-		if(ptr_this->value < ptr_s->value || ptr_s == S.tail) {
+	while(ptr_this != tail && ptr_s != S.tail) {
+		if(ptr_this->value < ptr_s->value) {
 			ptr_this = ptr_this->next;
 			remove(ptr_this->prev);
 			continue;
@@ -226,6 +227,13 @@ Set& Set::operator*=(const Set& S) {
 		ptr_s = ptr_s->next;
 	}
 
+	//Remove the rest of *this if ptr_s reached the tail first
+	while(ptr_this != tail) {
+		remove(ptr_this);
+		ptr_this = ptr_this->next;
+	}
+
+
 	return *this;
 }
 
@@ -237,7 +245,7 @@ Set& Set::operator-=(const Set& S) {
 
 	Node* ptr_this = head->next;
 	Node* ptr_s = S.head->next;
-
+	
 	while(ptr_s != S.tail && ptr_this != tail) {
 		if(ptr_this->value > ptr_s->value) {
 			ptr_s = ptr_s->next;
