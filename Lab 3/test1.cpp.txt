@@ -187,29 +187,29 @@ int main() {
 
     assert(BinarySearchTree<int>::get_count_nodes() == 0);
 
-    ///**************************************/
-    // std::cout << "\nPHASE 5: get_parent\n";
-    ///**************************************/
-    //{
-    //    BinarySearchTree<int> t;
-    //    assert(BinarySearchTree<int>::get_count_nodes() == 0);
+    /**************************************/
+    std::cout << "\nPHASE 5: get_parent\n";
+    /**************************************/
+    {
+       BinarySearchTree<int> t;
+       assert(BinarySearchTree<int>::get_count_nodes() == 0);
 
-    //    std::vector<int> V = {20, 10, 30, 5, 15, 35, 25, 12, 14, 33};
+       std::vector<int> V = {20, 10, 30, 5, 15, 35, 25, 12, 14, 33};
 
-    //    for (auto j : V) {
-    //        t.insert(j);
-    //    }
+       for (auto j : V) {
+           t.insert(j);
+       }
 
-    //    assert(BinarySearchTree<int>::get_count_nodes() == 10);
+       assert(BinarySearchTree<int>::get_count_nodes() == 10);
 
-    //    assert(t.get_parent(14) == 12);
-    //    assert(t.get_parent(10) == 20);
-    //    assert(t.get_parent(33) == 35);
-    //    assert(t.get_parent(20) == 0);
-    //    assert(t.get_parent(28) == 0);
-    //}
+       assert(t.get_parent(14) == 12);
+       assert(t.get_parent(10) == 20);
+       assert(t.get_parent(33) == 35);
+       assert(t.get_parent(20) == 0);
+       assert(t.get_parent(28) == 0);
+    }
 
-    // assert(BinarySearchTree<int>::get_count_nodes() == 0);
+    assert(BinarySearchTree<int>::get_count_nodes() == 0);
 
     /**************************************/
     std::cout << "\nPHASE 6: remove\n";
@@ -264,36 +264,38 @@ int main() {
 
     assert(BinarySearchTree<int>::get_count_nodes() == 0);
 
-    ///*****************************************************/
-    // std::cout << "\nPHASE 7: get_parent after remove\n";
-    ///*****************************************************/
-    ///* Test pointers to the parent node after the remove */
+    /*****************************************************/
+    std::cout << "\nPHASE 7: get_parent after remove\n";
+    /*****************************************************/
+    /* Test pointers to the parent node after the remove */
 
-    //{
-    //    BinarySearchTree<int> t;
-    //    assert(BinarySearchTree<int>::get_count_nodes() == 0);
+    {
+       BinarySearchTree<int> t;
+       assert(BinarySearchTree<int>::get_count_nodes() == 0);
 
-    //    std::vector<int> V = {20, 10, 30, 5, 15, 35, 25, 12, 14, 33};
+       std::vector<int> V = {20, 10, 30, 5, 15, 35, 25, 12, 14, 33};
 
-    //    for (auto j : V) {
-    //        t.insert(j);
-    //    }
+       for (auto j : V) {
+           t.insert(j);
+       }
 
-    //    assert(BinarySearchTree<int>::get_count_nodes() == 10);
+       assert(BinarySearchTree<int>::get_count_nodes() == 10);
 
-    //    // Remove some nodes
-    //    for (int i = 0; i < 35; i += 2) {
-    //        t.remove(i);
-    //    }
+       // Remove some nodes
+       for (int i = 0; i < 35; i += 2) {
+        //    cout << "\n =================== Remove " << i << "\n"; 
+           t.remove(i);
+        //    t.printTree();
+       }
 
-    //    assert(BinarySearchTree<int>::get_count_nodes() == 5);
+       assert(BinarySearchTree<int>::get_count_nodes() == 5);
 
-    //    assert(t.get_parent(5) == 15);
-    //    assert(t.get_parent(15) == 25);
-    //    assert(t.get_parent(25) == 0);
-    //    assert(t.get_parent(33) == 35);
-    //    assert(t.get_parent(35) == 25);
-    //}
+       assert(t.get_parent(5) == 15);
+       assert(t.get_parent(15) == 25);
+       assert(t.get_parent(25) == 0);
+       assert(t.get_parent(33) == 35);
+       assert(t.get_parent(35) == 25);
+    }
 
     assert(BinarySearchTree<int>::get_count_nodes() == 0);
 
