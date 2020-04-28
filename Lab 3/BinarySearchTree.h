@@ -5,6 +5,7 @@
 #pragma once
 
 #include "dsexceptions.h"
+// #include "iterator.h"
 
 using namespace std;
 
@@ -32,6 +33,7 @@ private:
 
 public:
 	BinarySearchTree() : root{nullptr} {}
+	class Iterator;
 
 	/**
 	 * Copy constructor
@@ -53,6 +55,20 @@ public:
 	BinarySearchTree &operator=(BinarySearchTree _copy) {
 		std::swap(root, _copy.root);
 		return *this;
+	}
+
+	/**
+	 * Returns the iterator pointing to the smallest value of the tree
+	 */
+	BinarySearchTree<Comparable>::Iterator begin() const {
+		return BinarySearchTree<Comparable>::Iterator {findMin(root)};
+	}
+
+	/**
+	 * Returns Iterator pointing to end of BST, i.e. successor of largest Comparable in the tree = nullptr
+	 */
+	BinarySearchTree<Comparable>::Iterator end() const {
+		return BinarySearchTree<Comparable>::Iterator {};
 	}
 
 	/**
@@ -82,8 +98,8 @@ public:
 	/**
 	 * Returns true if x is found in the tree.
 	 */
-	bool contains(const Comparable &x) const {
-		return (contains(x, root) != nullptr);
+	BinarySearchTree<Comparable>::Iterator contains(const Comparable &x) const {
+		return BinarySearchTree<Comparable>::Iterator {contains(x, root)};
 	}
 
 	/**
@@ -140,6 +156,8 @@ public:
 	 * Return a pair of values belonging to the tree corresponding to the closest predecessor and successor of a given value x.
 	 */
 	std::pair<Comparable, Comparable> find_pred_succ(const Comparable& x) const {
+		if(isEmpty()) throw new UnderflowException{};
+		
 		Comparable a = root->element;
 		Comparable b = root->element;
 		Node *temp = root;
@@ -188,6 +206,39 @@ public:
 
 private:
 	Node *root;
+
+	/** 
+	 * Find the smallest element larger than t
+	 * Return the element 
+	 */
+	Node* find_successor(Node* t) {
+		//Return the node with smallest element on the right side of t ->
+		// the function returns nullptr if t->right is nullptr
+		if(t->right) return findMin(t->right);
+
+		while(t->parent) {
+			if(t->element < t->parent->element) return t->parent->element;
+			t = t->parent;
+		}
+
+		return nullptr;
+	}
+	/** 
+	 * Find the largest element smaller than t
+	 * Return the node 
+	 */
+	Node* find_predecessor(Node* t) {
+		//Return the node with largest element on the left side of t ->
+		// the function returns nullptr if t->left is nullptr
+		if(t->left) return findMax(t->left);
+
+		while(t->parent) {
+			if(t->element > t->parent->element) return t->parent->element;
+			t = t->parent;
+		}
+
+		return nullptr;
+	}
 
 	/**
 	 * Private member function to insert into a subtree.
@@ -246,7 +297,7 @@ private:
 	}
 
 	/**
-	 * Private member function to find the smallest item in a subtree t.
+	 * Private member function to find the smallest item in tree.
 	 * Return node containing the smallest item.
 	 */
 	Node *findMin(Node *t) const {
@@ -356,6 +407,7 @@ private:
 
 	/**
 	 * Private member function to clone subtree.
+	 * P is the parent
 	 */
 	Node *clone(Node *t, Node* p = nullptr) const {
 		if (t == nullptr) {
@@ -370,23 +422,8 @@ private:
 
 		return temp;
 	}
-
-		// if (t->parent == nullptr) {
-		// 	Node* _root = new Node{t->element};
-		// 	_root->left = clone(t->left, _root);
-		// 	_root->right = clone(t->right, _root);
-		// 	return _root;
-
-		// }
-		// else {
-		// 	Node* temp = new Node{t->element};
-		// 	temp->parent = p;
-		// 	temp->left = clone(t->left, temp);
-		// 	temp->right = clone(t->right, temp);
-
-		// 	return temp;
-		// }
 };
 
 //Include the definition of class Node
 #include "node.h"
+#include "iterator.h"
