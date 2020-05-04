@@ -2,6 +2,13 @@
 #include <iomanip> //setw
 #include <utility> //std::move and std::pair
 
+/**
+ * Authors:
+ * Victor Lindquist, vicli268
+ * Johan Linder, johli153
+ * 
+ */
+
 #pragma once
 
 #include "dsexceptions.h"
@@ -62,7 +69,7 @@ public:
 	 */
 	Iterator begin() const {
 		if(isEmpty()) return end();
-		return Iterator {findMin(root)};
+		return Iterator (findMin(root));
 	}
 
 	/**

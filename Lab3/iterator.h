@@ -2,6 +2,13 @@
 
 #pragma once
 
+/**
+ * Authors:
+ * Victor Lindquist, vicli268
+ * Johan Linder, johli153
+ * 
+ */
+
 /* **********************************************************
  * Class to represent a bi-directional iterator for BSTs     *
  * Bi-directional iterators can be moved in both directions, *
@@ -11,8 +18,8 @@
 template <typename Comparable>
 class BinarySearchTree<Comparable>::Iterator {
 public:
+	friend class BinarySearchTree<Comparable>;
 	Iterator() : node_ptr{nullptr} {}
-
 	~Iterator() = default;
 
 	//return a reference to the element
@@ -34,7 +41,7 @@ public:
 		return !(*this == _it);
 	}
 	//Post Increment
-	Iterator operator++(Iterator) {
+	Iterator operator++(int) {
 		//return copy of *this
 		const Iterator* old{*this};
 		++(*this);
@@ -49,7 +56,7 @@ public:
 	}
 	
 	//Post decrement
-	Iterator operator--(Iterator) {
+	Iterator operator--(int) {
 		//return copy of *this
 		const Iterator* old{*this};
 		--(*this);
@@ -66,6 +73,5 @@ public:
 private:
 	Node* node_ptr;
 
-protected:
-	Iterator(Node* _ptr) : node_ptr{_ptr} {}
+	Iterator(Node* _ptr) : node_ptr{_ptr} {};
 };

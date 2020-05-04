@@ -11,7 +11,7 @@
 
 int main() {
     {
-        std::ifstream file{"../../other_files/words.txt"};
+        std::ifstream file{"./other files/words.txt"};
 
         if (!file) {
             std::cout << "Couldn't open file words.txt\n";
@@ -38,7 +38,7 @@ int main() {
         std::cout << '\n';*/
 
         // Load the expected inorder traversal of the tree
-        file.open("../../other_files/inorder_traversal.txt");
+        file.open("./other files/inorder_traversal.txt");
 
         if (!file) {
             std::cout << "Couldn't open file inorder_traversal.txt\n";

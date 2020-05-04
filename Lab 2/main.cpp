@@ -14,7 +14,7 @@ int main() {
      ******************************************************/
     std::cout << "TEST PHASE 0: default and conversion constructor\n";
 
-    Set A1{-4};
+    Set A1{};
     Set A2{-4};
 
     Set A3 = A1 * A2;
