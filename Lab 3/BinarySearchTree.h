@@ -60,15 +60,16 @@ public:
 	/**
 	 * Returns the iterator pointing to the smallest value of the tree
 	 */
-	BinarySearchTree<Comparable>::Iterator begin() const {
-		return BinarySearchTree<Comparable>::Iterator {findMin(root)};
+	Iterator begin() const {
+		if(isEmpty()) return end();
+		return Iterator {findMin(root)};
 	}
 
 	/**
 	 * Returns Iterator pointing to end of BST, i.e. successor of largest Comparable in the tree = nullptr
 	 */
-	BinarySearchTree<Comparable>::Iterator end() const {
-		return BinarySearchTree<Comparable>::Iterator {};
+	Iterator end() const {
+		return Iterator {};
 	}
 
 	/**
@@ -98,8 +99,8 @@ public:
 	/**
 	 * Returns true if x is found in the tree.
 	 */
-	BinarySearchTree<Comparable>::Iterator contains(const Comparable &x) const {
-		return BinarySearchTree<Comparable>::Iterator {contains(x, root)};
+	Iterator contains(const Comparable &x) const {
+		return Iterator {contains(x, root)};
 	}
 
 	/**
@@ -211,13 +212,13 @@ private:
 	 * Find the smallest element larger than t
 	 * Return the element 
 	 */
-	Node* find_successor(Node* t) {
+	static Node* find_successor(Node* t) {
 		//Return the node with smallest element on the right side of t ->
 		// the function returns nullptr if t->right is nullptr
 		if(t->right) return findMin(t->right);
 
 		while(t->parent) {
-			if(t->element < t->parent->element) return t->parent->element;
+			if(t->element < t->parent->element) return t->parent;
 			t = t->parent;
 		}
 
@@ -227,13 +228,13 @@ private:
 	 * Find the largest element smaller than t
 	 * Return the node 
 	 */
-	Node* find_predecessor(Node* t) {
+	static Node* find_predecessor(Node* t) {
 		//Return the node with largest element on the left side of t ->
 		// the function returns nullptr if t->left is nullptr
 		if(t->left) return findMax(t->left);
 
 		while(t->parent) {
-			if(t->element > t->parent->element) return t->parent->element;
+			if(t->element > t->parent->element) return t->parent;
 			t = t->parent;
 		}
 
@@ -300,7 +301,7 @@ private:
 	 * Private member function to find the smallest item in tree.
 	 * Return node containing the smallest item.
 	 */
-	Node *findMin(Node *t) const {
+	static Node *findMin(Node *t) {
 		if (t == nullptr) {
 			return nullptr;
 		}
@@ -316,7 +317,7 @@ private:
 	 * Private member function to find the largest item in a subtree t.
 	 * Return node containing the largest item.
 	 */
-	Node *findMax(Node *t) const {
+	static Node *findMax(Node *t) {
 		if (t != nullptr) {
 			while (t->right != nullptr) {
 				t = t->right;

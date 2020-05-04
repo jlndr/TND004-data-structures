@@ -30,8 +30,8 @@ public:
 		// return node_ptr == _it.node_ptr;
 	}
 
-	bool operator!=(Const Iterator& _it) const {
-		return !(this == _it);
+	bool operator!=(const Iterator& _it) const {
+		return !(*this == _it);
 	}
 	//Post Increment
 	Iterator operator++(Iterator) {

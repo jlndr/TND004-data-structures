@@ -14,6 +14,13 @@ int main() {
      ******************************************************/
     std::cout << "TEST PHASE 0: default and conversion constructor\n";
 
+    Set A1{-4};
+    Set A2{-4};
+
+    Set A3 = A1 * A2;
+    
+    std::cout << A1 << " " << A2 << " intersection: " << A3 << "\n";
+
     {
         Set S1{};
         assert(Set::get_count_nodes() == 2);
