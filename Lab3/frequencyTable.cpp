@@ -98,5 +98,11 @@ int main() {
 		std::cout << fp << "\n";
 	}
 
+	// std::vector<std::string>* test = new std::vector<std::string> {"hej", "hejdå", "då"};
+	// std::vector<std::string>::iterator it1 = std::begin(*test);
+	// std::cout << *it1 << std::endl;
+	// delete test;
+	// std::cout << *it1 << std::endl;
+
 	return 0;
 }
