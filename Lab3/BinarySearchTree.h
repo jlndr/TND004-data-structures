@@ -164,12 +164,23 @@ public:
 	 */
 	std::pair<Comparable, Comparable> find_pred_succ(const Comparable& x) const {
 		if(isEmpty()) throw new UnderflowException{};
-		
+
 		Comparable a = root->element;
 		Comparable b = root->element;
 		Node *temp = root;
 		
+		if(temp->element == x) {
+			Node* _max = findMax(temp->left);
+			Node* _min = findMin(temp->right);
+
+			a = (_max) ? _max->element : a;
+			b = (_min) ? _min->element : b;
+			return std::pair<Comparable, Comparable> {a, b};
+		}
+
 		while(temp != nullptr) {
+			//Traverse the tree towards the value of x,
+			// Save the most recent value visited in a or b depending on if we move down left or right
 			if(x < temp->element) {
 				b = temp->element;
 				temp = temp->left;
@@ -178,22 +189,24 @@ public:
 				a = temp->element;
 				temp = temp->right;
 			}
+
+			//If we find the value somewhere in the tree
 			else {
 				Node* _max = findMax(temp->left);
 				Node* _min = findMin(temp->right);
+
+				a = (_max) ? _max->element : a;
+				b = (_min) ? _min->element : b;
 				
-				if(temp->parent) { // If not root
-					// On the left side of parent
-					if(temp->parent->element > temp->element) {
-						a = (_max) ? _max->element : (temp->element < a) ? temp->element : a;
-						b = (_min) ? _min->element : b;
-					}
-					// On the right side of parent
-					else {
-						a = (_max) ? _max->element : a;
-						b = (_min) ? _min->element : (temp->element > b) ? temp->element : b;
-					}
+				// On the left side of parent
+				if(temp->parent->element > temp->element) {
+					a = (temp->element < a) ? temp->element : a;
 				}
+				// On the right side of parent
+				else {
+					b = (temp->element > b) ? temp->element : b;
+				}
+				
 				break;
 			}
 		}
