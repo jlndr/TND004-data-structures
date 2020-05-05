@@ -74,21 +74,21 @@ int main() {
 
         // Uncomment this part if contains() returns a boolean -- Exercise 1
         // Otherwise, comment it away
-         std::vector<int> V1{10, 12, 14, 20, 30};
+        //  std::vector<int> V1{10, 12, 14, 20, 30};
 
-         for (auto j : V1) {
-            assert(t.contains(j) == false);
-        }
+        //  for (auto j : V1) {
+        //     assert(t.contains(j) == false);
+        // }
 
-         std::vector<int> V2{5, 15, 25, 33, 35};
+        //  std::vector<int> V2{5, 15, 25, 33, 35};
 
-         for (auto j : V2) {
-            assert(t.contains(j));
-        }
+        //  for (auto j : V2) {
+        //     assert(t.contains(j));
+        // }
 
         // Uncomment this part if contains() returns an Iterator -- Exercise 2
         // Otherwise, comment it away
-        /*std::vector<int> V1{10, 12, 14, 20, 30};
+        std::vector<int> V1{10, 12, 14, 20, 30};
 
         for (auto j : V1) {
             assert(t.contains(j) == t.end());
@@ -98,7 +98,7 @@ int main() {
 
         for (auto j : V2) {
             assert(*t.contains(j) == j);
-        }*/
+        }
 
         auto p = t.find_pred_succ(12);
         assert(p.first == 5);    // pred

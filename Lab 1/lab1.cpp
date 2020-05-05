@@ -1,10 +1,10 @@
 // lab1.cpp : stable partition
 // Iterative and divide-and-conquer
 
-/* Authors:
-		Johan Linder, johli153
-		Victor Lindquist, vicli268
-*/
+/** Authors:
+ * Johan Linder, johli153
+ * Victor Lindquist, vicli268
+ */
 
 #include <iostream>
 #include <vector>

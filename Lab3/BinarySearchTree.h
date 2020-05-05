@@ -6,7 +6,6 @@
  * Authors:
  * Victor Lindquist, vicli268
  * Johan Linder, johli153
- * 
  */
 
 #pragma once
