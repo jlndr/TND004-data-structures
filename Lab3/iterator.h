@@ -49,7 +49,7 @@ public:
 
 	//Pre increment
 	Iterator& operator++() {
-		node_ptr = BinarySearchTree<Comparable>::find_successor(node_ptr);
+		node_ptr = find_successor(node_ptr);
 		// node_ptr = find_successor(node_ptr);
 		return *this;
 	}

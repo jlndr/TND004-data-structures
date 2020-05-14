@@ -211,8 +211,9 @@ public:
 			}
 		}
 
-		//a största värdet mindre än x
-		//b minsta värdet större än x
+		// if(a > x) a = b;
+		// else if(b < x) b = a;
+
 		return std::pair<Comparable, Comparable> {a, b};
 	}
 
@@ -250,6 +251,7 @@ private:
 	static Node* find_predecessor(Node* t) {
 		//Return the node with largest element on the left side of t ->
 		// the function returns nullptr if t->left is nullptr
+		if(!t) return findMax(root)
 		if(t->left) return findMax(t->left);
 
 		while(t->parent) {

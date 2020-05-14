@@ -137,7 +137,7 @@ bool Set::operator<=(const Set& b) const {
 		ptr_this = ptr_this->next;
 		ptr_b = ptr_b->next; 
 	}
-	
+	//Redovis
 	return (ptr_this == tail);
 	// return (*this * b).counter == counter;
 }
@@ -224,6 +224,7 @@ Set& Set::operator*=(const Set& S) {
 	}
 
 	//Remove the rest of *this if ptr_s reached the tail first
+	//Redovis
 	while(ptr_this != tail) {
 		remove(ptr_this);
 		ptr_this = ptr_this->next;
