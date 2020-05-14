@@ -52,7 +52,7 @@ bool compareCounters(FrequencyPair<std::string> fp1, FrequencyPair<std::string> 
 }
 
 bool isPunctation(const char& c) {
-	return !(std::isalnum(c) || (int) c == 39);
+	return !(std::isalnum(c) || (int) c == 39 || (int) c == 45);
 }
 
 int main() {
