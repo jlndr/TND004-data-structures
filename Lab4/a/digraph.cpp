@@ -181,25 +181,31 @@ void Digraph::printPath(int t) const {
 	}
 
 	// *** TODO ***
-	std::string s = std::to_string(t) + " (" + std::to_string(dist[t]) + ")";
-	std::vector<int> v;
+	preorderPrint(path[t]);
 
-	for() {
-		t = path[t];
-		s = std::to_string(t) + " -> " + s;
-	}
-	
+	std::cout << " " << t << " (" << dist[t] << ")";
 
-	std::cout << " " + s;
-
-	// // *** TODO ***
+	// // ******* Iterative example *******
+	// Starting from the back of the path
 	// std::string s = std::to_string(t) + " (" + std::to_string(dist[t]) + ")";
 
 	// while(dist[t] != 0) {
-	// 	t = path[t];
-	// 	s = std::to_string(t) + " -> " + s;
+	// 	t = path[t]; // assigning t to the previous node in path
+	// 	s = std::to_string(t) + " -> " + s; // add previous node first in string
 	// }
 	
-	// std::cout << " " + s;
+	// std::cout << " " + s; // formatting
+}
+
+// Recursively visits every node in the path, until it reaches the source,
+// then prints the nodes on the way back to the target 
+void Digraph::preorderPrint(int t) const {
+	//If t is not the source
+	if(dist[t] != 0) {
+		//Visit the previous node in the path
+		preorderPrint(path[t]);
+	}
+	
+	std::cout << " " << t << " ->";
 }
 
