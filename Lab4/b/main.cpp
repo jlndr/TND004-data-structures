@@ -55,7 +55,7 @@ int main() {
                 G->printGraph();
                 break;
             case 9:
-                std::cout << "Bye bye ...\n";
+                std::cout << "Bye bye...\n";
                 break;
             default:
                 std::cout << "Bad choice!\n";
@@ -66,7 +66,6 @@ int main() {
 }
 
 // -- FUNCTION DEFINITIONS
-
 int readInt(std::string prompt) {
     std::string number{};
 
@@ -86,13 +85,14 @@ int menu() {
     std::cout << "9. quit        \n";
     std::cout << "===============\n";
 
-    return readInt("Your choice ? ");
+    return readInt("Your choice? ");
 }
 
 // Read a graph's data from a file and create the graph
 // Return a pointer to the graph
 std::unique_ptr<Graph> readGraph(std::string fileName) {
-    std::ifstream file{"../../" + fileName};  // modify the file path, if needed
+    // std::ifstream file{"../../" + fileName};  // modify the file path, if needed
+    std::ifstream file{"graph" + fileName + ".txt"};  // modify the file path, if needed
 
     if (!file) {
         std::cout << "File not found!\n";

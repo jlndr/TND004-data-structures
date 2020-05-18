@@ -97,7 +97,7 @@ void Digraph::uwsssp(int s) const {
 // Dijktra�s algorithm
 void Digraph::pwsssp(int s) const {
 	if (s < 1 || s > size) {
-		cout << "\nERROR: expected source s in range 1.." << size << " !\n";
+		std::cout << "\nERROR: expected source s in range 1.." << size << " !\n";
 		return;
 	}
 
