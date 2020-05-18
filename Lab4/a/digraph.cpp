@@ -1,6 +1,10 @@
 /*********************************************
  * file:	~\tnd004\lab\lab4a\digraph.cpp       *
  * remark: implementation of directed graphs  *
+ * 
+ * Authors:
+ * Victor Lindquist, vicli268
+ * Johan Linder, johli153
  **********************************************/
 
 #include <iostream>
@@ -63,7 +67,7 @@ void Digraph::uwsssp(int s) const {
 		return;
 	}
 
-	// *** TODO ***
+	// *** TODO *** Done
 	Queue<int> Q{ size };
 	const int MAX = std::numeric_limits<int>::max();
 	
@@ -101,7 +105,7 @@ void Digraph::pwsssp(int s) const {
 		return;
 	}
 
-	// *** TODO ***
+	// *** TODO *** Done
 	const int MAX = std::numeric_limits<int>::max();
 	
 	for(int i = 1; i <= size; ++i) {
@@ -180,7 +184,7 @@ void Digraph::printPath(int t) const {
 		return;
 	}
 
-	// *** TODO ***
+	// *** TODO *** Done
 	preorderPrint(path[t]);
 
 	std::cout << " " << t << " (" << dist[t] << ")";
