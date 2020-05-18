@@ -104,8 +104,8 @@ int menu() {
 // Read a graph's data from a file and create the graph
 // Return a pointer to the graph
 std::unique_ptr<Digraph> readGraph(std::string fileName) {
-    //std::ifstream file{"../../" + fileName};  // modify the file path, if needed
-    std::ifstream file{"digraph" + fileName + ".txt"};  // modify the file path, if needed
+    std::ifstream file{"../../" + fileName};  // modify the file path, if needed
+    // std::ifstream file{"digraph" + fileName + ".txt"};  // modify the file path, if needed
 
     if (!file) {
         std::cout << "File not found!\n";
