@@ -59,4 +59,5 @@ private:
     mutable std::vector<int> done;
 
     //Add  any auxiliarly member functions, if needed
+    void preorderPrint(int t) const;
 };
