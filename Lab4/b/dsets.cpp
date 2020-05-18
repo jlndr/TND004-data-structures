@@ -1,6 +1,10 @@
 /*********************************************
  * file:	~\tnd004\lab\lab4b\dsets.cpp         *
  * remark: implementation of disjoint sets    *
+ * 
+ * Authors:
+ * Victor Lindquist, vicli268
+ * Johan Linder, johli153
  **********************************************/
 
 #include <iostream>
@@ -47,10 +51,18 @@ void DSets::join(int r, int s) {
 	assert(array[s] < 0);
 
 	// simple union
-	array[r] = s;
+	// array[r] = s;
 
-	// *** TODO ***
+	// *** TODO *** Done
 	// Union by size
+	if(array[r] > array[s]){
+		array[s] += array[r];
+		array[r] = s;
+	}
+	else {
+		array[r] += array[s];
+		array[s] = r;
+	}
 }
 
 // return name of current set for x
@@ -59,14 +71,20 @@ int DSets::find(int x) {
 	assert(x >= 1 && x <= size);
 
 	// simple find
+	// if (array[x] < 0) {
+	// 	return x;
+	// } else {
+	// 	return find(array[x]);
+	// }
+
+	// *** TODO *** Done
+	// find with path compression
 	if (array[x] < 0) {
 		return x;
 	} else {
-		return find(array[x]);
+		//Find root and update paths
+		return array[x] = find(array[x]);
 	}
-
-	// *** TODO ***
-	// find with path compression
 }
 
 // just in case ...

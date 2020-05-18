@@ -1,6 +1,10 @@
 /*********************************************
 * file:	~\tnd004\lab\lab4b\heap.h            *
 * remark:  class template for generic heaps  *
+* 
+* Authors:
+* Victor Lindquist, vicli268
+* Johan Linder, johli153
 **********************************************/
 #pragma once
 

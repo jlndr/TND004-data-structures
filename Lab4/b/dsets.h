@@ -1,6 +1,10 @@
 /*********************************************
 * file:	~\tnd004\lab\lab4b\dsets.cpp         *
 * remark: interface for disjoint sets        *
+* 
+* Authors:
+* Victor Lindquist, vicli268
+* Johan Linder, johli153
 **********************************************/
  #pragma once
 

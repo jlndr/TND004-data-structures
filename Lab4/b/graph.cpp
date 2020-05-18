@@ -1,6 +1,10 @@
 /*********************************************
  * file:	~\tnd004\lab\lab4b\graph.h        *
  * remark:implementation of undirected graphs *
+ * 
+ * Authors:
+ * Victor Lindquist, vicli268
+ * Johan Linder, johli153
  **********************************************/
 
 #include <iostream>
@@ -58,7 +62,7 @@ void Graph::removeEdge(int u, int v) {
 
 // Prim's minimum spanning tree algorithm
 void Graph::mstPrim() const {
-	// *** TODO ***
+	// *** TODO *** Done
 	int* dist = new int[size + 1];
 	int* path = new int[size + 1];
 	bool* done = new bool[size + 1];
@@ -121,7 +125,7 @@ void Graph::mstPrim() const {
 
 // Kruskal's minimum spanning tree algorithm
 void Graph::mstKruskal() const {
-	// *** TODO ***
+	// *** TODO *** Done
 	Heap<Edge> H{n_edges};
 	DSets D{size};
 

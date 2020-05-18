@@ -1,6 +1,10 @@
 /*********************************************
  * file:	~\tnd004\lab\lab4b\graph.h           *
  * remark: interface for undirected graphs    *
+ * 
+ * Authors:
+ * Victor Lindquist, vicli268
+ * Johan Linder, johli153
  **********************************************/
 
 #pragma once
