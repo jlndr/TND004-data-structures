@@ -1,6 +1,10 @@
 /*********************************************
  * file:	~\tnd004\lab\lab4a\list.cpp          *
  * remark: implementation of adjacency lists  *
+ * 
+ * Authors:
+ * Victor Lindquist, vicli268
+ * Johan Linder, johli153
  **********************************************/
 
 #include <iostream>

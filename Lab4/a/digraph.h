@@ -1,6 +1,9 @@
 /*********************************************
  * file:	~\tnd004\lab\lab4a\digraph.h         *
  * remark: interface for directed graphs      *
+ * Authors:
+ * Victor Lindquist, vicli268
+ * Johan Linder, johli153
  **********************************************/
 
 #pragma once
